@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-int length;
+int length = 0;
 class Node
 {
 private:
@@ -8,18 +8,19 @@ private:
 public:
     int data;
     Node *next;
-  
+
     Node(int data)
     {
         this->data = data;
-        this->next= NULL;
+        this->next = NULL;
     };
     ~Node();
 };
 void insert(Node *&Head, Node *&Tail, int data)
 {
-    // First Node 
-    if (Head == NULL){
+    // First Node
+    if (Head == NULL)
+    {
         Node *new_node = new Node(data);
         Head = new_node;
         Tail = Head;
@@ -34,6 +35,37 @@ void insert(Node *&Head, Node *&Tail, int data)
         return;
     }
 }
+
+void final_LL(Node *&Head, Node *&Tail, int n)
+{
+    int count = 1;
+    int gotill = length - n;
+
+    if (n == length)
+    {
+        Head = Head->next;
+        return;
+    }
+    Node *temp = Head;
+    while (count <= gotill)
+    {
+        if (count == gotill)
+        {
+            temp->next = temp->next->next;
+            if (temp->next == NULL)
+            {
+                Tail = temp;
+            }
+            return;
+        }
+        else
+        {
+            count++;
+            temp = temp->next;
+            continue;
+        }
+    }
+}
 void print(Node *Head)
 {
     Node *temp = Head;
@@ -42,6 +74,7 @@ void print(Node *Head)
     {
         cout << temp->data << " ";
         temp = temp->next;
+        length++;
     }
     cout << "\n";
 }
@@ -50,7 +83,7 @@ int main()
     Node *Head = NULL;
     Node *Tail = Head;
 
-    int data, i = 4;
+    int data, i = 0, n;
 
     while (i < 4)
     {
@@ -60,5 +93,11 @@ int main()
         i++;
     }
     cout << "The LL is : ";
+    print(Head);
+
+    cout << "Enter the value of n : ";
+    cin >> n;
+
+    final_LL(Head, Tail, n);
     print(Head);
 }
