@@ -62,10 +62,10 @@ Node *Reverse_The_LL(Node *Head)
     return Previous;
 }
 
-Node *findMid(node *head)
+Node *findMid(Node *head)
 {
-    node *slow = head;
-    node *fast = head->next;
+    Node *slow = head;
+    Node *fast = head->next;
     
     while(fast != NULL && fast->next != NULL)
     {
@@ -169,5 +169,6 @@ int main()
     cout << "THE FIRST lINKED LIST IS  : ";
     Print(Head_1);
 
-    node *result = mergeSort(Head_1);
+    Head_1 = mergeSort(Head_1);
+    Print(Head_1);
 }
